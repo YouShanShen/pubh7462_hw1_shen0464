@@ -1,5 +1,5 @@
 ---
-title: " PubH 7462 Homework2 Problem1"
+title: " PubH 7462 Homework1 Problem1"
 author: "You Shan Shen"
 date: "2022/2/2"
 output: 
