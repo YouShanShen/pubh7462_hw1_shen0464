@@ -1,12 +1,13 @@
 ---
-title: " PubH 7462 Hw1 problem2"
+title: " PubH 7462 Homework1 Problem2"
 author: "You Shan Shen"
 date: "2022/2/1"
 output: html_document
 ---
-```{r Setup, echo=true, warning = FALSE, include=FALSE }
-knitr::opts_knit$set(echo = TRUE,
+```{r Setup, echo=TRUE, warning = FALSE, include=FALSE }
+knitr::opts_knit$set(echo = TRUE, warning = FALSE,results = 'hide',
 root.dir = rprojroot::find_rstudio_root_file())
+library(knitr)
 library(tidyverse)
 
 theme_set(theme(plot.title = element_text(hjust = 0.5), legend.position = "bottom"))
@@ -23,22 +24,6 @@ number_row <- nrow(penguin.df)
 
 number_col <- ncol(penguin.df)
 
-number_species <- penguin.df  %>% count(species)
-
-number_island <- penguin.df  %>% count(island)
-
-bill_length_mm <- penguin.df  %>% select(bill_length_mm)
-
-bill_depth_mm <- penguin.df  %>% select(bill_depth_mm)
-
-flipper_length_mm <- penguin.df  %>% select(flipper_length_mm)
-
-body_mass_g <- penguin.df  %>% select(body_mass_g)
-
-number_sex <- penguin.df  %>% count(sex)
-
-number_year <- penguin.df  %>% count(year)
-
 mu_fliper <- mean( penguin.df$flipper_length_mm, na.rm = TRUE ) %>% 
              round( digits = 3)
 
@@ -51,21 +36,28 @@ mu_bill <- mean( penguin.df$bill_length_mm, na.rm = TRUE ) %>%
 sd_bill <- sd(penguin.df$bill_length_mm, na.rm = TRUE) %>%  
            round( digits = 3)
 
-#mu_bill <- penguin.df  %>% mean( bill_length_mm, na.rm = TRUE )
 
 ```
+Penguins data set has `r number_row` observations and `r number_col` variables.
+Species is a factor denoting penguin species (Adélie, Chinstrap and Gentoo).
 
-Penguins data set has ` r number_row ` observations and ` r number_col ` variables.
-Species is a factor denoting penguin species (Adélie, Chinstrap and Gentoo) and the number of each group is ` r number_species `.
-Island is a factor denoting island in Palmer Archipelago, Antarctica (Biscoe, Dream or Torgersen) and the number of each island is ` r number_island `.
-` r bill_length_mm ` is a number denoting bill length (millimeters).
-` r bill_depth_mm ` is a number denoting bill depth (millimeters).
-` r flipper_length_mm ` is an integer denoting flipper length (millimeters).
-` r body_mass_g ` is an integer denoting body mass (grams)
-Sex is a factor denoting penguin sex (female, male). The number for each sex and for missing data is ` r number_sex `.
-Year is an integer denoting the study year (2007, 2008, or 2009) and the number for each year is ` r number_year `. 
-The mean and standard deviation of flipper is ` r mu_fliper` and ` r sd_fliper ` respectively.
-The mean and standard deviation of bill length is ` r mu_bill ` and ` r sd_bill ` respectively.
+Island is a factor denoting island in Palmer Archipelago, Antarctica (Biscoe, Dream or Torgersen).
+
+Bill length is a number denoting bill length (millimeters).
+
+Bill depth is a number denoting bill depth (millimeters).
+
+Flipper length is an integer denoting flipper length (millimeters).
+
+Body mass is an integer denoting body mass (grams)
+
+Sex is a factor denoting penguin sex (female, male). 
+
+Year is an integer denoting the study year (2007, 2008, or 2009). 
+
+The mean and standard deviation of flipper is `r mu_fliper` and `r sd_fliper` respectively.
+
+The mean and standard deviation of bill length is `r mu_bill` and `r sd_bill` respectively.
 
 ```{r, echo=TRUE, warning=FALSE}
 library(ggplot2)
@@ -74,9 +66,14 @@ drop_na %>%
 ggplot(aes(x = bill_length_mm , y = flipper_length_mm)) +
 geom_point(aes(color=species)) +
 facet_wrap(~sex, scales= "free" ) +
-ggtitle( "palmerpenguins" ) +
+ggtitle( "Palmer Penguins" ) +
 xlab( "Bill Length (mm)" ) + 
 ylab( "Fliper length (mm)" )
 
 ```
+
+
+Comparing the two genders, the plot shows that male palmer pengiuns have longer bill length in all species. However, flipper length has no difference between genders in all species.
+
+Comparing the three species, the plot shows that Gentoo has the longest bill and flipper length. Adelie has the shortest bill and flipper length.
 
