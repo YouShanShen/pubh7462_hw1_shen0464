@@ -1,44 +1,44 @@
 ---
-title: " PubH 7462 Homework 2 "
+title: " PubH 7462 Homework2 Problem1"
 author: "You Shan Shen"
 date: "2022/2/2"
 output: 
   github_document
 ---
 
-```{r Setup, echo=true, warning = FALSE, include=FALSE }
-knitr::opts_knit$set(echo = TRUE,
+```{r Setup, echo=TRUE, warning = FALSE, results='hide'}
+knitr::opts_knit$set(echo = TRUE, warning = FALSE,results = 'hide' ,
 root.dir = rprojroot::find_rstudio_root_file())
 library(tidyverse)
 
 theme_set(theme(plot.title = element_text(hjust = 0.5), legend.position = "bottom"))
 
 ```
-```{r , echo=true}
+```{r , echo=TRUE}
 library(tibble)
 library(dplyr)
 library(reshape)
 library(forcats)
 library(ggplot2)
 
-df <- tibble(
- X=rnorm(mean=0, sd=1, n=1000),
- Y=rnorm(mean=1, sd=2, n=1000),
+Normal_random_sample <- tibble(
+ X=rnorm(mean = 0, sd = 1, n = 1000),
+ Y=rnorm(mean = 1, sd = 2, n=  1000),
  sum_indicator=ifelse( X + Y > 0.5,"True","False")
 ) 
 
 
-df$'x + y > 0.5' <-recode(df$sum_indicator, `True`="Yes", `False`="No")
+Normal_random_sample$'x + y > 0.5' <- recode(Normal_random_sample$sum_indicator, `True`="Yes", `False`="No")
 
-df$'x + y > 0.5' <-as.factor(df$'x + y > 0.5')
+Normal_random_sample$'x + y > 0.5' <- as.factor(Normal_random_sample$'x + y > 0.5')
 
-mutate(df$sum_indicator<-recode(df$sum_indicator, `True`="Yes",`False`="No"))
 
-df$`x + y > 0.5` <- fct_relevel( df$`x + y > 0.5`, c("Yes","No") )
-str(df)
 
-ggplot(df, aes(x = X , y = Y)) +
-geom_point(aes(color=`x + y > 0.5`)) +
+Normal_random_sample$`x + y > 0.5` <- fct_relevel( Normal_random_sample$`x + y > 0.5`, c("Yes","No") )
+str(Normal_random_sample)
+
+ggplot(Normal_random_sample, aes(x = X , y = Y)) +
+geom_point(aes(color = `x + y > 0.5`)) +
 scale_color_manual(values = c("orange", "blue")) +  
 ggtitle( "Independent Bivariate Normal Random Variables" ) +
 xlab( " X ~ N (0,1) " ) + 
