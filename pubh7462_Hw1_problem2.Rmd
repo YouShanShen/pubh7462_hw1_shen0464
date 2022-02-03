@@ -2,7 +2,7 @@
 title: " PubH 7462 Homework1 Problem2"
 author: "You Shan Shen"
 date: "2022/2/1"
-output: html_document
+output: github_document
 ---
 ```{r Setup, echo=TRUE, warning = FALSE, include=FALSE }
 knitr::opts_knit$set(echo = TRUE, warning = FALSE,results = 'hide',
